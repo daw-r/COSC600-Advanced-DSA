@@ -116,4 +116,6 @@ int main()
         std::cout << "Result: There is no majority element.\n";
     else
         std::cout << "\nResult: Majority element is " << majority << '\n';
+
+    std::cout << "\n=====================================\n";
 }
