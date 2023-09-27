@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
+"""
+Name: Devere Anthony Weaver
 
+Assignment: Programming Assignment 1
+Problem: Problem 2 - Recursive Binary Algorithm
+
+Description: Problem2.py illustrates a function decimalToBinary() that taks as
+input a positive decimal number and prints out the decimal representation of the
+number to standard output. 
+
+E.g. If input is 57 then 111001 would be output to stdout.
+
+"""
 
 def decimalToBinary(dec):
   """
@@ -31,4 +43,4 @@ def main():
   decimalToBinary(number)
   print()
 
-main()
+main()    # invoke program
