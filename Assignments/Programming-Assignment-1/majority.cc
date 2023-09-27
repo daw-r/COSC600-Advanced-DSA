@@ -1,3 +1,11 @@
+/* TODO:
+    - use Python or something to get an actual frequency count on the integers 
+    for each file
+
+    - add docstrings to each function 
+
+    - testing
+*/
 #include <iostream>
 #include <vector>
 #include <fstream>
