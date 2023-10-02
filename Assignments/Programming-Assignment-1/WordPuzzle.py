@@ -56,8 +56,8 @@ def main():
     #         words.append(line.strip())
     # print(f"\nList of words to search for:\n{words}")
 
-    word = "ruby"
-
+    word = "cave"
+    #for word in words:
     # Find locations of first letter
     found_row = 0
     found_col = 0
@@ -78,11 +78,12 @@ def CheckRight(grid, word):
                 found_word = ""
                 test_word = ""
                 # check right
-                if j >= len(grid):
+                if (j + len(word) >= len(grid)):  # don't go outside of board to right
                     found.append("")
-                for h in range(len(word)):    # iterate over grid to 
-                    test_word = test_word + (grid[i][j+h])   # build strings
-                found.append(test_word)
+                else:
+                    for h in range(len(word)):    # iterate over grid to 
+                        test_word = test_word + (grid[i][j+h])   # build strings
+                    found.append(test_word)
     print(found)
     print(word in found)
 
@@ -96,7 +97,7 @@ def CheckLeft(grid, word):
                 found_word = ""
                 test_word = ""
                 # check right
-                if j <= 0: 
+                if j <= 0 or j - len(word) <= 0:     # don't go outside of board to left
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -115,7 +116,7 @@ def CheckDown(grid, word):
                 found_word = ""
                 test_word = ""
                 # check down
-                if j <= 0: 
+                if i + len(word) >=  len(grid): 
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -134,7 +135,7 @@ def CheckUp(grid, word):
                 found_word = ""
                 test_word = ""
                 # check down
-                if j <= 0: 
+                if i <= 0 or i - len(word) <= 0: 
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
