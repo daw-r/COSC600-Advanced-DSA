@@ -57,17 +57,17 @@ def main():
     #         words.append(line.strip())
     # print(f"\nList of words to search for:\n{words}")
 
-    word = "cave"
+    word = "ruby"
     #for word in words:
     # Find locations of first letter
     found_row = 0
     found_col = 0
     start_coordinates_list = []
     found = [] 
-    # CheckRight(grid, word)
-    # CheckLeft(grid, word)
-    # CheckDown(grid, word)
-    # CheckUp(grid, word)
+    print(f"Right: ", end=""); CheckRight(grid, word)
+    print(f"Left: ", end=""); CheckLeft(grid, word)
+    print(f"Down: ", end=""); CheckDown(grid, word)
+    print(f"Up: ", end=""); CheckUp(grid, word)
     print(f"Right Up Diagonal:", end=""); RightUpDiag(grid, word)
     print(f"Left Up Diagonal:", end=""); LeftUpDiag(grid, word)
     print(f"Right Down Diagonal:", end=""); RightDownDiag(grid, word)
@@ -98,11 +98,7 @@ def CheckLeft(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
                 if j <= 0 or j - len(word) <= 0:     # don't go outside of board to left
                     found.append("")
                 else:
@@ -117,11 +113,7 @@ def CheckDown(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check down
                 if i + len(word) >=  len(grid): 
                     found.append("")
                 else:
@@ -136,11 +128,7 @@ def CheckUp(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check down
                 if i <= 0 or i - len(word) <= 0: 
                     found.append("")
                 else:
@@ -155,11 +143,7 @@ def RightUpDiag(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
                 if (j + len(word) >= len(grid)) or (i - len(word) <= 0):  # don't go outside of board to right
                     found.append("")
                 else:
@@ -174,11 +158,7 @@ def LeftUpDiag(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
                 if (i - len(word) <= 0 ) or (j - len(word) <= 0): 
                     found.append("") 
                 else:
@@ -193,11 +173,7 @@ def RightDownDiag(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
                 if (j + len(word) >= len(grid)) or (i + len(word) >= len(grid)):  # don't go outside of board to right
                     found.append("")
                 else:
@@ -212,11 +188,7 @@ def LeftDownDiag(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
                 if (j - len(word) >= len(grid)) or (i + len(word) >= len(grid)):  # don't go outside of board to right
                     found.append("")
                 else:
