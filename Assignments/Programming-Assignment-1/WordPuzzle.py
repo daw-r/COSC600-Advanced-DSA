@@ -79,12 +79,8 @@ def CheckRight(grid, word):
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
-                found_row = i
-                found_col = j
-                found_word = ""
                 test_word = ""
-                # check right
-                if (j + len(word) >= len(grid)):  # don't go outside of board to right
+                if (j < 0) or (j + len(word) - 1 >= len(grid)):  # don't go outside of board to right
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -99,12 +95,12 @@ def CheckLeft(grid, word):
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
-                if j <= 0 or j - len(word) <= 0:     # don't go outside of board to left
+                if j < 0 or j - len(word) + 1 < 0:     # don't go outside of board to left
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
                         test_word = test_word + (grid[i][j-h])   # build strings
-                    found.append(test_word)
+                found.append(test_word)
     print(found)
     print(word in found)
 
@@ -114,7 +110,7 @@ def CheckDown(grid, word):
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
-                if i + len(word) >=  len(grid): 
+                if i + len(word) - 1 >=  len(grid): 
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -129,7 +125,7 @@ def CheckUp(grid, word):
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
-                if i <= 0 or i - len(word) <= 0: 
+                if i < 0 or i - len(word) + 1 < 0: 
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -144,7 +140,7 @@ def RightUpDiag(grid, word):
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
-                if (j + len(word) >= len(grid)) or (i - len(word) <= 0):  # don't go outside of board to right
+                if (j + len(word) >= len(grid)) or (i - len(word) + 1 < 0):  # don't go outside of board to right
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
@@ -174,7 +170,7 @@ def RightDownDiag(grid, word):
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
-                if (j + len(word) >= len(grid)) or (i + len(word) >= len(grid)):  # don't go outside of board to right
+                if (j + len(word) -1  >= len(grid)) or (i + len(word) - 1 >= len(grid)):  # don't go outside of board to right
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
