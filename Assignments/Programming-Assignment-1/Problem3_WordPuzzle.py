@@ -18,7 +18,7 @@ instance of each word in the list (had difficulty creating output of
 a 2D array with only the word locations filled in).
 """
 
-#import copy
+import time
 
 def Parse(filename):
     """
@@ -69,6 +69,7 @@ def main():
 
     # iterate over words list to find location of first intances of the words
     for word in words:
+        start = time.time()   # time to find each word in seconds
         word = word.upper()
         print(f"\n\nSEARCH TERM: {word}")
         if (Right(grid, word) or Left(grid, word) or 
@@ -79,6 +80,8 @@ def main():
                 pass
         else:
             print(f"{word} not found.")
+        runtime = time.time() - start
+        print(f"Runtime to find word: {runtime:.4f} seconds.")
 # end main()
 
 
