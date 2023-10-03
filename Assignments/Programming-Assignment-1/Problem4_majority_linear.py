@@ -5,11 +5,11 @@ Filename: majority_linear.py
 
 Author: Devere Anthony Weaver
 
-Assignment: Programming Assignment 1, Problem 4
+Assignment: Programming Assignment 1
+Problem: Problem 4 - Majority Element (Linear Time)
 
-Purpose: This program is an implementation of the Majority Element algorithm
+Description: This program is an implementation of the Majority Element algorithm
 using the linear implementation and also illustrates the runtime in seconds.
-
 """
 
 def Open(filename):

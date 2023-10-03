@@ -1,10 +1,24 @@
 #!/usr/bin/env python3
 
 """
-TODO: Fill in docstring here
+Filename: Problem3_Solution.py
+
+Author: Devere Anthony Weaver
+
+Assignment: Programming Assignment 1
+Problem: Problem 3 - Word Puzzle Problem
+
+Description: This program is a solution to the word puzzle problem. The program 
+takes as input a file containing a 2D matrix of letters representing a 
+crossword puzzle board and another file containing a 1D array of words to 
+be searched for. 
+
+The output is the 2D coordinate pair of the start and end of the first 
+instance of each word in the list (had difficulty creating output of
+a 2D array with only the word locations filled in).
 """
 
-import copy
+#import copy
 
 def Parse(filename):
     """
@@ -30,101 +44,97 @@ def Parse(filename):
 
 
 def main():
+    """
+    Main driver of program
+    """
     # set up the word puzzle board
-    grid = Parse("textpuzzle.txt")
-    #grid = Parse("puzzleinput.txt")
-    # print("The Word Puzzle Board:")
-    # for line in grid:
-    #     print(f"{line}")
+    grid = Parse("puzzleinput.txt")
 
-    # create an empty board with same dimensions as grid
-    # output_grid = copy.deepcopy(grid)
-    # for i in range(len(output_grid)):
-    #     for j in range(len(output_grid)):
-    #         output_grid[i][j] = "-"
-    # print("\n\nThe Output Board")
-    # for line in output_grid:
-    #     print(f"{line}")
-    # print("\n\n")
-    rows, cols = (7, 7)
-    arr = [['-']*cols]*rows
-    for line in arr:
-        print(line)
+    # rows, cols = (7, 7)
+    # arr = [['-']*cols]*rows
+    # for line in arr:
+    #     print(line)
 
-
-    # create a list of words to look for in the puzzle
+    # create a list of words to look for in the puzzle based on the 
+    # gives words file from the assignment
     words = []
-    #with open("wordlist.txt") as f:
-    with open("words.txt") as f:
+    with open("wordlist.txt") as f:
+    #with open("words.txt") as f:
         for line in f.readlines():
             words.append(line.strip())
 
-    words.append("kell")
-    words.append("bilv")
-    words.append("yysv")
-    words.append("rlat")
-    words.append("rsmm")
-    words.append("pcly")
     print(f"\nList of words to search for:\n{words}")
 
-    print("\n\nNOTE: ALL INDEXING IS ZERO-BASED FOR THE FOLLOWING RESULTS.")
+    print("\n\n\nNOTE: ALL INDEXING IS ZERO-BASED FOR THE FOLLOWING RESULTS.")
 
-    word = "ruby"
-    val, output = CheckRight(grid, word)
-    print(output)
-   
-    # for word in words:
-    #     #word = word.upper()
-    #     print(f"\n\nSEARCH TERM: {word}")
-    #     if (
-    #         CheckRight(grid, word) or CheckLeft(grid, word) or 
-    #         CheckDown(grid, word) or CheckUp(grid, word) or 
-    #         RightUpDiag(grid, word) or LeftUpDiag(grid, word) or
-    #         RightDownDiag(grid, word) or LeftDownDiag(grid,word)
-    #         ):
-    #         print(f"Success.")
-    #     else:
-    #         print(f"{word} not found.")
-    #         print(f"Failure.")
+    # iterate over words list to find location of first intances of the words
+    for word in words:
+        word = word.upper()
+        print(f"\n\nSEARCH TERM: {word}")
+        if (Right(grid, word) or Left(grid, word) or 
+            Down(grid, word) or Up(grid, word) or 
+            RightUpDiag(grid, word) or LeftUpDiag(grid, word) or
+            RightDownDiag(grid, word) or LeftDownDiag(grid,word)
+            ):
+                pass
+        else:
+            print(f"{word} not found.")
 # end main()
 
 
-def CheckRight(grid, word):
-    found = []
+def Right(grid, word):
+    """
+    Right(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction to the right of the start of the searched word
 
-    output_grid = copy.deepcopy(grid)   # shallow copy
-    for i in range(len(output_grid)):
-        for j in range(len(output_grid)):
-            output_grid[i][j] = ""
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the right direction 
+
+        or
+
+        2. False if word is not found in the right direction
+    """
+    found = []
 
     # find word
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
             if grid[i][j] == word[0]:    # check first letter
                 test_word = ""
+                found_row = i
+                found_col = j
                 if (j < 0) or (j + len(word) - 1 >= len(grid)):  # don't go outside of board to right
                     found.append("")
                 else:
                     for h in range(len(word)):    # iterate over grid to 
                         test_word = test_word + (grid[i][j+h])   # build strings
                         if test_word == word:    # we've found the word
-                            output_grid[i] = test_word
                             print(f"The first instance of the word '{word}'",end="")
                             print(f" was found starting at ({i},{j})", end="")
                             print(f" and \ngoing right ending at ({i},{j+h})")
-                            return True, output_grid 
-                        else:
-                            output_grid[i][j] = ""
+                            return True
                     #found.append(test_word)
-    #return False
-    # print(f"Right direction: {found}")
-    # #print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
-def CheckLeft(grid, word):
+def Left(grid, word):
+    """
+    Left(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction to the left of the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the left direction 
+
+        or
+
+        2. False if word is not found in the left direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -141,14 +151,23 @@ def CheckLeft(grid, word):
                             print(f" and \ngoing left ending at ({i},{j-h})")
                             return True
     #             found.append(test_word)
-    # print(f"Left direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
-def CheckDown(grid, word):
+def Down(grid, word):
+    """
+    Down(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction below the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the down direction 
+
+        or
+
+        2. False if word is not found in the down direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -165,14 +184,23 @@ def CheckDown(grid, word):
                             print(f" and \ngoing down ending at ({i+h},{j})")
                             return True
     #                 found.append(test_word)
-    # print(f"Down direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
-def CheckUp(grid, word):
+def Up(grid, word):
+    """
+    Up(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction above the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the up direction 
+
+        or
+
+        2. False if word is not found in the up direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -189,14 +217,23 @@ def CheckUp(grid, word):
                             print(f" and \ngoing up ending at ({i-h},{j})")
                             return True
     #                 found.append(test_word)
-    # print(f"Up direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
 def RightUpDiag(grid, word):
+    """
+    RightUpDiag(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction diagonally to the upper right of the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the upper right diagonal direction 
+
+        or
+
+        2. False if word is not found in the upper right diagonal direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -214,14 +251,23 @@ def RightUpDiag(grid, word):
                             print(f" ending at ({i-h},{j+h})")
                             return True
     #                 found.append(test_word)
-    # print(f"Right Up Diagonal direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
 def LeftUpDiag(grid, word):
+    """
+    LeftUpDiag(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction diagonally to the upper left of the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the upper left diagonal direction 
+
+        or
+
+        2. False if word is not found in the upper left diagonal direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -239,15 +285,23 @@ def LeftUpDiag(grid, word):
                             print(f" ending at ({i-h},{j-h})")
                             return True
     #                    found.append(test_word)
-    # print(f"Left Up Diagonal direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
-
 
 def RightDownDiag(grid, word):
+    """
+    RightDownDiag(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction diagonally to the lower right of the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the lower right diagonal direction 
+
+        or
+
+        2. False if word is not found in the lower right diagonal direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -265,15 +319,24 @@ def RightDownDiag(grid, word):
                             print(f" ending at ({i+h},{j+h})")
                             return True
     #                 found.append(test_word)
-    # print(f"Right Down direction: {found}")
-    # # print(word in found)
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
 
 def LeftDownDiag(grid, word):
+    """
+    LeftDownDiag(grid, word) - takes a word puzzle grid and searches for the give word
+    in the direction diagonally to the upper right of the start of the searched word
+
+    Input:
+        1. grid - a 2D matrix containing words representing a word puzzle 
+        2. word - the word to be searched for
+    
+    Output:
+        1. True if word is found in the lower left diagonal direction 
+
+        or
+
+        2. False if word is not found in the lower left diagonal direction
+    """
     found = []
     for i in range(len(grid)):    # iterate over rows
         for j in range(len(grid)):    # iterate over columns
@@ -291,10 +354,5 @@ def LeftDownDiag(grid, word):
                             print(f" ending at ({i + len(word) - 1},{j - len(word) + 1})")
                             return True
     #                    found.append(test_word)
-    # print(f"Left Down direction: {found}")
-    # if (word in found):
-    #     return True
-    # else:
-    #     return False 
 
-main()
+main()    # invoke program

@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 
 """
-Name: Devere Anthony Weaver
+Filename: Problem1_Solution.py
+
+Author: Devere Anthony Weaver
 
 Assignment: Programming Assignment 1
 Problem: Problem 1 - Guessing Game
 
-Description: TODO
+Description: Implementation of the binary search algorithm to play a guessing
+game. The program randomly chooses an integer values in [1, 1000000] and then 
+uses the BinarySearch function to quickly find it. The program 
+also keeps track of the number of guesses for each turn and
+computes the average number of guess per trial. 
 """
 import random
 
 
 def BinarySearch(array, key):
     """
-
     Implementation of the binary search algorithm. The function
     takes an array-like structure and searches for the given key. This
     implementation of binary search returns the index of the search key,
@@ -29,7 +34,6 @@ def BinarySearch(array, key):
         * the key's index if found or -1 if the key is not found
         * value - the value of the key itself
         * the number of iterations (guesses) until the key was found
-
     """
     low = 1
     high = len(array) - 1
@@ -53,6 +57,9 @@ def BinarySearch(array, key):
 
 
 def main():
+    """
+    Main Driver
+    """
     arr = range(1, 1000001)
     guess = []
 

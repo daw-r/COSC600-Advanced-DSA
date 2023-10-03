@@ -5,11 +5,11 @@ Filename: majority_recursive.py
 
 Author: Devere Anthony Weaver
 
-Assignment: Programming Assignment 1, Problem 4
+Assignment: Programming Assignment 1
+Problem: Problem 4 - Majority Element (Recursive)
 
-Purpose: This program is an implementation of the Majority Element algorithm
+Description: This program is an implementation of the Majority Element algorithm
 using the recursive implementation and also illustrates the runtime in seconds.
-
 """
 
 

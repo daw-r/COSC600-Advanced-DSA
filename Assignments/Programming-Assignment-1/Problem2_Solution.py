@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-Name: Devere Anthony Weaver
+Filename: Problem2_Solution.py
+
+Author: Devere Anthony Weaver
 
 Assignment: Programming Assignment 1
 Problem: Problem 2 - Recursive Binary Algorithm
@@ -11,7 +13,6 @@ input a positive decimal number and prints out the decimal representation of the
 number to standard output. 
 
 E.g. If input is 57 then 111001 would be output to stdout.
-
 """
 
 
