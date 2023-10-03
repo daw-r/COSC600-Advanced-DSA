@@ -59,29 +59,33 @@ def main():
         for line in f.readlines():
             words.append(line.strip())
 
-    # words.append("kell")
-    # words.append("bilv")
-    # words.append("yysv")
-    # words.append("rlat")
-    # words.append("rsmm")
-    # words.append("pcly")
+    words.append("kell")
+    words.append("bilv")
+    words.append("yysv")
+    words.append("rlat")
+    words.append("rsmm")
+    words.append("pcly")
     print(f"\nList of words to search for:\n{words}")
 
     print("\n\nNOTE: ALL INDEXING IS ZERO-BASED FOR THE FOLLOWING RESULTS.")
+
+    word = "ruby"
+    val, output = CheckRight(grid, word)
+    print(output)
    
-    for word in words:
-        #word = word.upper()
-        print(f"\n\nSEARCH TERM: {word}")
-        if (
-            CheckRight(grid, word) or CheckLeft(grid, word) or 
-            CheckDown(grid, word) or CheckUp(grid, word) or 
-            RightUpDiag(grid, word) or LeftUpDiag(grid, word) or
-            RightDownDiag(grid, word) or LeftDownDiag(grid,word)
-            ):
-            print(f"Success.")
-        else:
-            print(f"{word} not found.")
-            print(f"Failure.")
+    # for word in words:
+    #     #word = word.upper()
+    #     print(f"\n\nSEARCH TERM: {word}")
+    #     if (
+    #         CheckRight(grid, word) or CheckLeft(grid, word) or 
+    #         CheckDown(grid, word) or CheckUp(grid, word) or 
+    #         RightUpDiag(grid, word) or LeftUpDiag(grid, word) or
+    #         RightDownDiag(grid, word) or LeftDownDiag(grid,word)
+    #         ):
+    #         print(f"Success.")
+    #     else:
+    #         print(f"{word} not found.")
+    #         print(f"Failure.")
 # end main()
 
 
@@ -104,6 +108,7 @@ def CheckRight(grid, word):
                     for h in range(len(word)):    # iterate over grid to 
                         test_word = test_word + (grid[i][j+h])   # build strings
                         if test_word == word:    # we've found the word
+                            output_grid[i] = test_word
                             print(f"The first instance of the word '{word}'",end="")
                             print(f" was found starting at ({i},{j})", end="")
                             print(f" and \ngoing right ending at ({i},{j+h})")
