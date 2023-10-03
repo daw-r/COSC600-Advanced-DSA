@@ -33,19 +33,23 @@ def main():
     # set up the word puzzle board
     grid = Parse("textpuzzle.txt")
     #grid = Parse("puzzleinput.txt")
-    print("The Word Puzzle Board:")
-    for line in grid:
-        print(f"{line}")
+    # print("The Word Puzzle Board:")
+    # for line in grid:
+    #     print(f"{line}")
 
     # create an empty board with same dimensions as grid
-    output_grid = copy.deepcopy(grid)
-    for i in range(len(output_grid)):
-        for j in range(len(output_grid)):
-            output_grid[i][j] = "-"
-    print("\n\nThe Output Board")
-    for line in output_grid:
-        print(f"{line}")
-    print("\n\n")
+    # output_grid = copy.deepcopy(grid)
+    # for i in range(len(output_grid)):
+    #     for j in range(len(output_grid)):
+    #         output_grid[i][j] = "-"
+    # print("\n\nThe Output Board")
+    # for line in output_grid:
+    #     print(f"{line}")
+    # print("\n\n")
+    rows, cols = (7, 7)
+    arr = [['-']*cols]*rows
+    for line in arr:
+        print(line)
 
 
     # create a list of words to look for in the puzzle
@@ -54,14 +58,17 @@ def main():
     with open("words.txt") as f:
         for line in f.readlines():
             words.append(line.strip())
+
+    # words.append("kell")
+    # words.append("bilv")
+    # words.append("yysv")
+    # words.append("rlat")
+    # words.append("rsmm")
+    # words.append("pcly")
     print(f"\nList of words to search for:\n{words}")
 
-    words.append("kell")
-    words.append("bilv")
-    words.append("yysv")
-    words.append("rlat")
-    words.append("rsmm")
-    words.append("pcly")
+    print("\n\nNOTE: ALL INDEXING IS ZERO-BASED FOR THE FOLLOWING RESULTS.")
+   
     for word in words:
         #word = word.upper()
         print(f"\n\nSEARCH TERM: {word}")
@@ -80,14 +87,11 @@ def main():
 
 def CheckRight(grid, word):
     found = []
-    start_indices = []
-    end_indices = []
 
-    # create copy of output grid
-    output_grid = copy.deepcopy(grid)
+    output_grid = copy.deepcopy(grid)   # shallow copy
     for i in range(len(output_grid)):
         for j in range(len(output_grid)):
-            output_grid[i][j] = "-" 
+            output_grid[i][j] = ""
 
     # find word
     for i in range(len(grid)):    # iterate over rows
@@ -99,11 +103,13 @@ def CheckRight(grid, word):
                 else:
                     for h in range(len(word)):    # iterate over grid to 
                         test_word = test_word + (grid[i][j+h])   # build strings
-                        if test_word == word:
+                        if test_word == word:    # we've found the word
                             print(f"The first instance of the word '{word}'",end="")
                             print(f" was found starting at ({i},{j})", end="")
                             print(f" and \ngoing right ending at ({i},{j+h})")
-                            return True
+                            return True, output_grid 
+                        else:
+                            output_grid[i][j] = ""
                     #found.append(test_word)
     #return False
     # print(f"Right direction: {found}")
@@ -227,7 +233,7 @@ def LeftUpDiag(grid, word):
                             print(f" and \ngoing up diagonally to the left",end="")
                             print(f" ending at ({i-h},{j-h})")
                             return True
-#                    found.append(test_word)
+    #                    found.append(test_word)
     # print(f"Left Up Diagonal direction: {found}")
     # # print(word in found)
     # if (word in found):
@@ -279,7 +285,7 @@ def LeftDownDiag(grid, word):
                             print(f" and \ngoing down diagonally to the left",end="")
                             print(f" ending at ({i + len(word) - 1},{j - len(word) + 1})")
                             return True
-#                    found.append(test_word)
+    #                    found.append(test_word)
     # print(f"Left Down direction: {found}")
     # if (word in found):
     #     return True
