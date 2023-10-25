@@ -119,54 +119,75 @@ int Max_Sub_Sum_Linear(const std::vector<T>& vec)
     return maximum_sum;
 }
 
+template<typename T>
+void Max_Sub_Sum_Solutions(const std::vector<T>& vec, int n) 
+{
+
+    
+    std::cout << "ANALYSIS FOR N = " << n << "\n\n";
+    std::cout << "CUBIC RUNTIME\n";
+    auto start = std::chrono::high_resolution_clock::now();
+    int max = Max_Sub_Sum_Cubic(vec);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "Output: " << max << '\n';
+    if (duration.count() < 0)
+        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
+    else   
+        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
+
+
+    std::cout << "\n\nQUADRATIC RUNTIME\n";
+    start = std::chrono::high_resolution_clock::now();
+    max = Max_Sub_Sum_Quadratic(vec);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "Output: " << max << '\n';
+    if (duration.count() < 0)
+        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
+    else   
+        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
+
+
+    std::cout << "\n\n(N LOG N) RUNTIME\n";
+    start = std::chrono::high_resolution_clock::now();
+    max = Max_Sub_Sum_Recursive_Driver(vec);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "Output: " << max << '\n';
+    if (duration.count() < 0)
+        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
+    else   
+        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
+
+    std::cout << "\n\nLINEAR RUNTIME\n";
+    start = std::chrono::high_resolution_clock::now();
+    max = Max_Sub_Sum_Linear(vec);
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "Output: " << max << '\n';
+    if (duration.count() < 0)
+        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
+    else   
+        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
+
+}
+
 int main() 
 {
     std::vector<int> input_vec{};
-    std::vector<int> test_vec{-2, 11, -4, 13, -5, -2};
+    int n{};
+    std::cout << "Enter size of input vector: N = ";
+    std::cin >> n;
 
     /* Generate random integers in [-5000, 5000] */
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 gen(rd()); // seed the generator
     std::uniform_int_distribution<> distr(-5000, 5000); // define the range
-    for(int n=0; n<10000; ++n)
+
+    for(int i = 0; i < n; ++i)
         input_vec.push_back(distr(gen));
-    
-    /* WORK WITH TEST_VEC FOR NOW UNTIL CORRECT */
-    std::cout << "CUBIC RUNTIME\n";
-    auto start = std::chrono::high_resolution_clock::now();
-    int max = Max_Sub_Sum_Cubic(input_vec);
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Output: " << max << '\n';
-    std::cout << "Execution time: " << duration.count() << " millisecond(s).\n";
 
-    std::cout << "\n\n\nQUADRATIC RUNTIME\n";
-    start = std::chrono::high_resolution_clock::now();
-    max = Max_Sub_Sum_Quadratic(input_vec);
-    end = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Output: " << max << '\n';
-    std::cout << "Execution time: " << duration.count() << " millisecond(s).\n";
-
-    std::cout << "\n\n\n(N LOG N) RUNTIME\n";
-    start = std::chrono::high_resolution_clock::now();
-    max = Max_Sub_Sum_Recursive_Driver(input_vec);
-    end = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Output: " << max << '\n';
-    if (duration.count() < 0)
-        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
-    else   
-        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
-
-    std::cout << "\n\n\nLINEAR RUNTIME\n";
-    start = std::chrono::high_resolution_clock::now();
-    max = Max_Sub_Sum_Linear(input_vec);
-    end = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << "Output: " << max << '\n';
-    if (duration.count() < 0)
-        std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
-    else   
-        std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
+    Max_Sub_Sum_Solutions(input_vec, input_vec.size());
+ 
 }
