@@ -122,9 +122,7 @@ int Max_Sub_Sum_Linear(const std::vector<T>& vec)
 template<typename T>
 void Max_Sub_Sum_Solutions(const std::vector<T>& vec, int n) 
 {
-
-    
-    std::cout << "ANALYSIS FOR N = " << n << "\n\n";
+    std::cout << "\nANALYSIS FOR N = " << n << "\n\n";
     std::cout << "CUBIC RUNTIME\n";
     auto start = std::chrono::high_resolution_clock::now();
     int max = Max_Sub_Sum_Cubic(vec);
@@ -170,24 +168,37 @@ void Max_Sub_Sum_Solutions(const std::vector<T>& vec, int n)
         std::cout << "Execution time: <" << duration.count() << " millisecond(s).\n";
     else   
         std::cout << "Execution time: < " << duration.count() << " millisecond(s).\n";
-
 }
 
 int main() 
 {
     std::vector<int> input_vec{};
     int n{};
-    std::cout << "Enter size of input vector: N = ";
-    std::cin >> n;
 
-    /* Generate random integers in [-5000, 5000] */
-    std::random_device rd; // obtain a random number from hardware
-    std::mt19937 gen(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(-5000, 5000); // define the range
+    while (true)
+    {
+        std::cout << "Enter size of input vector: N = ";
+        std::cin >> n;
 
-    for(int i = 0; i < n; ++i)
-        input_vec.push_back(distr(gen));
+        /* Generate random integers in [-5000, 5000] */
+        std::random_device rd; // obtain a random number from hardware
+        std::mt19937 gen(rd()); // seed the generator
+        std::uniform_int_distribution<> distr(-5000, 5000); // define the range
 
-    Max_Sub_Sum_Solutions(input_vec, input_vec.size());
- 
+        for(int i = 0; i < n; ++i)
+            input_vec.push_back(distr(gen));
+
+        Max_Sub_Sum_Solutions(input_vec, input_vec.size());
+
+        std::string c{};
+        std::cout << "\nRun again? [y/N] > ";
+        std::cin >> c;
+        if (c == "y" || c == "Y")
+        {
+            std::cout << '\n';
+            continue;
+        }
+        else
+            break;
+    }
 }
