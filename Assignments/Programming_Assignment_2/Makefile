@@ -4,6 +4,10 @@ CXXFLAGS = -std=c++17
 MaximumSubSum: MaximumSubsequenceSum.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+Josephus: josephus.cc
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
 clean:
 	rm MaximumSubSum
+	rm Josephus
 
