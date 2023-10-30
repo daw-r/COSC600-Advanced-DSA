@@ -1,5 +1,19 @@
-/* MaximumSubsequenceSum.cc - four different solutions to the maximum 
-subsequence sum problem */
+/*
+Filename: maximum_subsequence_sum.cc
+
+Author: Devere Anthony Weaver 
+
+Assignment: Programming Assignment 2
+Problem: Problem 1 - Maximum Subsequence Sum 
+
+Description: This program implements the four algorithms in the text book. 
+It allows the user to enter the size of the array. 
+
+WARNING: The cubic, and to a lesser degree the quadratic, functions have 
+INCREDIBLY long execution times for large N. If this occurs, just exit control
+of the program, unless you have a lot of free time. 
+*/
+
 #include <iostream>
 #include <vector>
 #include <random>
@@ -8,6 +22,7 @@ subsequence sum problem */
 template<typename T>
 void print_vector(const std::vector<T>& vec) 
 {
+    /* Print out the values in the given vector */
     for (size_t i{}; i < vec.size(); i++)
         std::cout << vec[i] << ' ';
     std::cout << '\n';
@@ -37,6 +52,7 @@ int Max_Sub_Sum_Cubic(const std::vector<T>& vec)
 template<typename T>
 int Max_Sub_Sum_Quadratic(const std::vector<T>& vec) 
 {
+    /* Quadratic implementation of maximum subsequence sum problem */
     int maximum_sum{};
 
     for (size_t i{}; i < vec.size(); i++)
@@ -105,6 +121,7 @@ int Max_Sub_Sum_Recursive_Driver(const std::vector<T>& vec)
 template<typename T>
 int Max_Sub_Sum_Linear(const std::vector<T>& vec) 
 {
+    /* Linear implementation of maximum subsequence sum problem */
     int maximum_sum{}, this_sum{};
 
     for (size_t i{}; i < vec.size(); i++)
@@ -122,6 +139,7 @@ int Max_Sub_Sum_Linear(const std::vector<T>& vec)
 template<typename T>
 void Max_Sub_Sum_Solutions(const std::vector<T>& vec, int n) 
 {
+    /* just runs all the above implementations with the same n */
     std::cout << "\nANALYSIS FOR N = " << n << "\n\n";
     std::cout << "CUBIC RUNTIME\n";
     auto start = std::chrono::high_resolution_clock::now();
