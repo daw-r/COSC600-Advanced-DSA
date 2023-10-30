@@ -1,13 +1,12 @@
 CXX = c++ 
 CXXFLAGS = -std=c++17
 
-MaximumSubSum: MaximumSubsequenceSum.cc
+Maximum_Sub_Sum: MaximumSubsequenceSum.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 Josephus: josephus.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-clean:
-	rm MaximumSubSum
-	rm Josephus
+Longest_Sequence: longest_sequence.cc
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
