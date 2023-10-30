@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 
+"""
+Filename: josephus.py
+
+Author: Devere Anthony Weaver 
+
+Assignment: Programming Assignment 2
+Problem: Problem 2 - Josephus Problem
+
+Description: This program is an implementation of the Josephus problem. The 
+user enters in the number of soldiers in the circle and their names. Then 
+the user enters the nth position to start eliminating from. All soldiers 
+are subsequently eliminated until there is one solider remaining. The 
+output is the elimination list of soldiers and their original positions, 
+as a tuple, and the survivor along with their original position.
+"""
 
 class Queue(object):
     def __init__(self, size):
