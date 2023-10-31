@@ -35,7 +35,7 @@ for i in range(n):
 size = len(matrix)  # num elements in matrix
 longest_sequence = []  # store the longest sequence in a Python list
 stack = []  # utilize Python list as a stack datastructure instead of
-# implementing an entire stack ADT
+            # implementing an entire stack ADT
 
 # iterate over matrix and create unique sequences with each
 # element in the matrix

@@ -20,8 +20,8 @@ as a tuple, and the survivor along with their original position.
 class Queue(object):
     """
     Implementation of a queue data structure using the circular array
-    implementation version. Used to store the soldiers names and
-    eliminate them in the desired order.
+    instead of using a Python list. 
+    Used to store the soldiers names and eliminate them in the desired order.
     """
 
     def __init__(self, size):
@@ -163,6 +163,9 @@ for i in range(num_soldiers):
 queue = Queue(num_soldiers)
 for soldier in soldiers:
     queue.insert(soldier)
+
+# show full queue 
+print(f"\nSoldiers: {queue}")
 
 # execute Josephus problem
 position = int(input("\nEnter n-th position to eliminate > "))
