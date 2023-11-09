@@ -5,4 +5,4 @@ Maximum_Sub_Sum: maximum_subsequence_sum.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
-	remove Maximum_Sub_Sum
+	rm Maximum_Sub_Sum
