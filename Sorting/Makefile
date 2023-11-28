@@ -7,5 +7,8 @@ insertion_sort: insertion_sort.cc
 shell_sort: shell_sort.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+selection_sort: selection_sort.cc
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
 clean:
 	rm insertion_sort
