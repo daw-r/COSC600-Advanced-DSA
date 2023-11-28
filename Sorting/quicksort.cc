@@ -1,5 +1,4 @@
 /* simple implementation of quicksort algorithm */
-
 #include <iostream>
 #include <vector>
 
@@ -16,7 +15,6 @@ void print_vector(std::vector<T>& vec)
     }
 }
 
-
 template<typename T>
 int partition(std::vector<T>& vec, int low_index, int high_index)
 {
@@ -26,7 +24,7 @@ int partition(std::vector<T>& vec, int low_index, int high_index)
 
     // select middle element as pivot
     int midpoint = low_index + (high_index - low_index) / 2;
-    pivot = vec[midpoint];
+    T pivot = vec[midpoint];
 
     // partition into low and high partions 
     bool done = false;
@@ -65,7 +63,33 @@ int partition(std::vector<T>& vec, int low_index, int high_index)
     return high_index;
 }
 
+template<typename T>
+void quicksort(std::vector<T>& vec, int low_index, int high_index)
+{
+    // base case: single element list
+    if (low_index >= high_index)
+        return;
+    
+    // compute the low index
+    int low_end_index = partition(vec, low_index, high_index); 
+
+    // partition and sort low side
+    quicksort(vec, low_index, low_end_index);
+
+    // partition and sort high side
+    quicksort(vec, low_end_index + 1, high_index);
+}
+
 int main()
 {
+    std::vector<int> v1{4,34,10,25,1};
+    std::cout << "Input: "; print_vector(v1); 
+    quicksort(v1, 0, 4);
+    std::cout << "Output: "; print_vector(v1); std::cout << "\n\n";
+
+    std::vector<int> v2{10,2,78,4,45,32,7,11};
+    std::cout << "Input: "; print_vector(v2);
+    quicksort(v2, 0, 7);
+    std::cout << "Output: "; print_vector(v2); std::cout << "\n\n";
 
 }

@@ -2,3 +2,5 @@ insertion_sort
 shell_sort
 selection_sort
 .vscode/settings.json
+.vscode/c_cpp_properties.json
+quicksort
