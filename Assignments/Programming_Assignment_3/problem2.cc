@@ -1,3 +1,15 @@
+/*
+Filename: problem2.cc
+
+Author: Devere Anthony Weaver 
+
+Assignment: Programming Assignment 3
+Problem: Problem 2
+
+Description: This program implements insertion sort, selection sort, bubble 
+sort, and merge sort algorithms on a list of 5,000 randomly generated elements.
+*/
+
 #include <iostream> 
 #include <vector>
 #include <random>
@@ -52,7 +64,7 @@ void insertion_sort(std::vector<T> vec)
 }
 
 template<typename T>
-void selection_sort(std::vector<T>& vec)
+void selection_sort(std::vector<T> vec)
 {
     int smallest_index{};
     T temp{};
@@ -76,7 +88,7 @@ void selection_sort(std::vector<T>& vec)
     }
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
-    print_vector(vec, 100);
+    print_vector(vec, 100); std::cout << '\n';
     std::cout << "Selection sort execution time: " << duration.count() 
               << " miliseconds(s).\n";
 }
@@ -127,11 +139,33 @@ void merge_sort(std::vector<T> vec)
     merge_sort(vec, temp, 0, vec.size() - 1);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
-    print_vector(vec, 100);
+    print_vector(vec, 100); std::cout << '\n';
     std::cout << "Merge sort execution time: " << duration.count() 
               << " miliseconds(s).\n";
 }
 
+template<typename T>
+void bubble_sort(std::vector<T> vec)
+{
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i{}; i < vec.size() - 1; i++)
+    {
+        for (int j{}; j < vec.size() - i - 1; j++) 
+        {
+            if (vec[j] > vec[j+1])
+            {
+                T temp = vec[j];
+                vec[j] = vec[j+1];
+                vec[j+1] = temp;
+            }
+        }
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
+    print_vector(vec, 100); std::cout << '\n';
+    std::cout << "Bubble sort execution time: " << duration.count() 
+              << " miliseconds(s).\n";
+}
 
 int main()
 {
@@ -143,5 +177,6 @@ int main()
     std::cout << "Selection sort (first 100):\n"; selection_sort(v); std::cout << '\n';
     std::cout << std::string(100, '-') << '\n';
     std::cout << "Merge sort (first 100):\n"; merge_sort(v); std::cout << '\n';
-
+    std::cout << std::string(100, '-') << '\n';
+    std::cout << "Bubble sort (first 100):\n"; bubble_sort(v); std::cout << '\n';
 }
