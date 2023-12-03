@@ -45,13 +45,14 @@ public:
       
       std::string arrayString("[");
       arrayString += std::to_string(heapArray[1]);
-      for (int i = 2; i <= currentSize; i++) {
+      for (int i = 2; i < 50; i++) {
          arrayString += ", ";
          arrayString += std::to_string(heapArray[i]);
       }
       arrayString += "]";
       return arrayString;
    }
+
 
    int GetCurrentSize() {return currentSize;}
    int GetBuildSwaps() {return buildSwaps;}
