@@ -4,10 +4,15 @@
 
 int main()
 {
-    MaxHeap mx;
-    std::vector<int>v{1,2,3,4,5};
-    for (int i{}; i < v.size(); i++)
-        mx.Insert(v[i]);
-    std::cout << mx.GetHeapArrayString() << '\n';
+    auto bh = BinaryHeap<int>(100);
+    std::vector<int> input{5, 4, 3, 2, 1};
+    // for (int i{}; i < input.size(); i++)
+    //     bh.insert(input[i]);
+    bh.insert(5);
+//    bh.insert(4);
+    // bh.insert(1);
+    // bh.insert(1);
+    // bh.insert(1);
 
+    bh.print_heap();
 }
