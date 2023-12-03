@@ -9,6 +9,7 @@ TEST_CASE("Build heap in linear time")
     SECTION("correct heap array size")
     {
         REQUIRE(linear_heap.GetCurrentSize() == 5);
+        REQUIRE(linear_heap.GetBuildSwaps() == 3);
     }
 
     SECTION("correct min heap order")
@@ -27,6 +28,7 @@ TEST_CASE("Build heap in O(log N) time")
     SECTION("correct heap array size")
     {
         REQUIRE(log_heap.GetCurrentSize() == 5);
+        REQUIRE(log_heap.GetBuildSwaps() == 6);
     }
 
     SECTION("correct min heap order")

@@ -7,6 +7,7 @@ class BinaryHeap
 public:
     explicit BinaryHeap(int capacity = 100)
         : heapArray(1), currentSize{0} {};
+
     explicit BinaryHeap(const std::vector<T> &items)
         : heapArray(items.size() + 10), currentSize{int(items.size())}
     {
@@ -15,7 +16,7 @@ public:
         for (int i{}; i < items.size(); ++i)
             heapArray[i+1] = items[i];
         
-        buildHeap();
+        buildSwaps = buildHeap();
     }
 
     void insert(const T& x)
@@ -30,7 +31,10 @@ public:
 
         heapArray[0] = std::move(copy);
         for(; x < heapArray[hole / 2]; hole /= 2)
+        {
             heapArray[hole] = std::move(heapArray[hole/2]);
+            buildSwaps++;
+        }
         heapArray[hole] = std::move(heapArray[0]);
     }
 
@@ -50,21 +54,29 @@ public:
    }
 
    int GetCurrentSize() {return currentSize;}
+   int GetBuildSwaps() {return buildSwaps;}
 
 private:
     int currentSize;   // number of elements in heap
     std::vector<T> heapArray;   // internal heap array
+    int buildSwaps{};
 
-    void buildHeap()
+    int buildHeap()
     {
         /* build heap in linear time */
+        int total_swaps{};
         for (int i = currentSize / 2; i > 0; --i)
-            percolateDown(i);
+        {
+            int swaps = percolateDown(i);
+            total_swaps += swaps;
+        }
+        return total_swaps;
     }
 
-    void percolateDown(int hole)
+    int percolateDown(int hole)
     {
         int child;
+        int swaps{};
         T temp = std::move(heapArray[hole]);
 
         for (; hole * 2 <= currentSize; hole = child)
@@ -73,10 +85,14 @@ private:
             if (child != currentSize && heapArray[child + 1] < heapArray[child])
                 ++child;
             if (heapArray[child] < temp)
+            {
                 heapArray[hole] = std::move(heapArray[child]);
+                swaps++;
+            }
             else   
                 break;
         }
         heapArray[hole] = std::move(temp);
+        return swaps;
     }
 };
