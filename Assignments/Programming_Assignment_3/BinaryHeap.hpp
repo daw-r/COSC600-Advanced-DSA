@@ -5,6 +5,8 @@ template <typename T>
 class BinaryHeap
 {
 public:
+    explicit BinaryHeap(int capacity = 100)
+        : heapArray(1), currentSize{0} {};
     explicit BinaryHeap(const std::vector<T> &items)
         : heapArray(items.size() + 10), currentSize{int(items.size())}
     {
@@ -14,6 +16,22 @@ public:
             heapArray[i+1] = items[i];
         
         buildHeap();
+    }
+
+    void insert(const T& x)
+    {
+        // double allocation size as needed
+        if(currentSize == heapArray.size() - 1)
+            heapArray.resize(heapArray.size() * 2);
+
+        // percolate up
+        int hole = ++currentSize;
+        T copy = x;
+
+        heapArray[0] = std::move(copy);
+        for(; x < heapArray[hole / 2]; hole /= 2)
+            heapArray[hole] = std::move(heapArray[hole/2]);
+        heapArray[hole] = std::move(heapArray[0]);
     }
 
     std::string GetHeapArrayString() {
