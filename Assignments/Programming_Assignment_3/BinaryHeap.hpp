@@ -16,6 +16,23 @@ public:
         buildHeap();
     }
 
+    std::string GetHeapArrayString() {
+      if (currentSize == 0) {
+         return std::string("[]");
+      }
+      
+      std::string arrayString("[");
+      arrayString += std::to_string(heapArray[1]);
+      for (int i = 2; i <= currentSize; i++) {
+         arrayString += ", ";
+         arrayString += std::to_string(heapArray[i]);
+      }
+      arrayString += "]";
+      return arrayString;
+   }
+
+   int GetCurrentSize() {return currentSize;}
+
 private:
     int currentSize;   // number of elements in heap
     std::vector<T> heapArray;   // internal heap array
