@@ -12,5 +12,8 @@ heaptest: heaptest.cc
 problem2: problem2.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+problem3: problem3.cc
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
 problem4: problem4.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
