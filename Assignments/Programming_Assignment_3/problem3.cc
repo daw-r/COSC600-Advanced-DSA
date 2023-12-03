@@ -18,7 +18,6 @@ void print_vector(std::vector<T> &vec)
 template <typename T>
 void countSort(std::vector<T> &vec)
 {
-//    int output[10];
     std::vector<int> output(vec.size());
     std::vector<int> count(vec.size());
     int max{vec[0]};
@@ -61,7 +60,6 @@ void countSort(std::vector<T> &vec)
 
 std::vector<int> generate_random(int low, int high, int n)
 {
-    // generate 5,000 random numbers
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(low, high);
