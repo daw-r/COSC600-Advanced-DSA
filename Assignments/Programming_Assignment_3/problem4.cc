@@ -1,98 +1,162 @@
-#include <cstdlib>
+/* Filename: problem4.cc
+ *
+ * Author: Devere Anthony Weaver
+ *
+ * Assignment: Programming Assignment 3
+ * Problem: Problem 4
+ *
+ * Description: This program implements a radix sort algorithm to sort a vector
+ * of 5,000 randomly generated integers.
+ */
 #include <iostream>
 #include <string>
 #include <vector>
+#include <random>
 
 template <typename T>
-void print_vector(T arr[], int n)
+void print_array(T arr[], int n)
 {
-    std::cout << "(";
-    for (int i{}; i < n; i++)
-    {
-        if (i == n - 1)
-            std::cout << arr[i] << ")\n";
-        else 
-            std::cout << arr[i] << ", ";
-    }
+   std::cout << "(";
+   for (int i{}; i < n; i++)
+      std::cout << arr[i] << ", ";
 }
 
-int get_length(int value) {
-   if (value == 0) 
+template <typename T>
+void print_array_last(T arr[], int n)
+{
+   for (int i = 0; i < n; i++)
+   {
+      if (i == n - 1)
+         std::cout << arr[4900 + i] << ")\n";
+      else
+         std::cout << arr[4900 + i] << ", ";
+   }
+}
+
+std::vector<int> generate_random(int low, int high, int n)
+{
+   /* generate n random numbers in the interval [low, high] */
+   std::random_device rd;
+   std::mt19937 gen(rd());
+   std::uniform_int_distribution<> distr(low, high);
+   std::vector<int> v{};
+   for (int i = 0; i < n; i++)
+      v.push_back(distr(gen));
+   return v;
+}
+
+int get_length(int x)
+{
+   if (x == 0)
       return 1;
-      
+
    int digits = 0;
-   while (value != 0) {
+   while (x != 0)
+   {
       digits++;
-      value /= 10;
+      x /= 10;
    }
    return digits;
 }
 
-int max_length(int* numbers, int numbersSize) {
-   int maxDigits = 0;
-   for (int i = 0; i < numbersSize; i++) {
-      int digitCount = get_length(numbers[i]);
-      if (digitCount > maxDigits) {
-         maxDigits = digitCount;
+int max_length(int *list, int list_size)
+{
+   /* get max length of arrays */
+   int max = 0;
+   for (int i = 0; i < list_size; i++)
+   {
+      int digits = get_length(list[i]);
+      if (digits > max)
+      {
+         max = digits;
       }
    }
-   return maxDigits;
+   return max;
 }
-   
-void radix_sort(int* numbers, int numbersSize) {
-   std::vector<std::vector<int>*> buckets;
-   for (int i = 0; i < 10; i++) {
-      std::vector<int>* bucket = new std::vector<int>();
+
+void radix_sort(int *list, int list_size)
+{
+   /* implementation of a radix sort algorithm */
+   std::vector<std::vector<int> *> buckets;
+   for (int i = 0; i < 10; i++)
+   {
+      std::vector<int> *bucket = new std::vector<int>();
       buckets.push_back(bucket);
    }
-      
-   int copyBackIndex = 0;
-      
-   int maxDigits = max_length(numbers, numbersSize);
-      
-   int pow10 = 1;
-   for (int digitIndex = 0; digitIndex < maxDigits; digitIndex++) {
-      for (int i = 0; i < numbersSize; i++) {
-         int num = numbers[i];
-         int bucketIndex = (abs(num) / pow10) % 10;
-         buckets[bucketIndex]->push_back(num);
+
+   int back = 0;
+
+   int max = max_length(list, list_size);
+
+   int pow = 1;
+   for (int i = 0; i < max; i++)
+   {
+      for (int j = 0; j < list_size; j++)
+      {
+         int n = list[j];
+         int bucket_index = (abs(n) / pow) % 10;
+         buckets[bucket_index]->push_back(n);
       }
-         
-      copyBackIndex = 0;
-      for (int i = 0; i < 10; i++) {
-         std::vector<int>& bucket = *buckets[i];
-         for (int j = 0; j < bucket.size(); j++) {
-            numbers[copyBackIndex] = bucket[j];
-            copyBackIndex++;
+      back = 0;
+
+      for (int i = 0; i < 10; i++)
+      {
+         std::vector<int> &bucket = *buckets[i];
+         for (int j = 0; j < bucket.size(); j++)
+         {
+            list[back] = bucket[j];
+            back++;
          }
          bucket.clear();
       }
-      
-      pow10 *= 10;
+
+      pow *= 10;
    }
-      
-   std::vector<int> nonNegatives;
-   for (int i = 0; i < numbersSize; i++) 
+
+   std::vector<int> sorted;
+   for (int i = 0; i < list_size; i++)
    {
-      int num = numbers[i];
-      nonNegatives.push_back(num);
+      int num = list[i];
+      sorted.push_back(num);
    }
-      
-   copyBackIndex = 0;
-   for (int i = 0; i < nonNegatives.size(); i++) {
-      numbers[copyBackIndex] = nonNegatives[i];
-      copyBackIndex++;
+
+   back = 0;
+   for (int i = 0; i < sorted.size(); i++)
+   {
+      list[back] = sorted[i];
+      back++;
    }
-   
-   for (int i = 0; i < 10; i++) {
+
+   for (int i = 0; i < 10; i++)
+   {
       delete buckets[i];
    }
 }
 
 int main()
 {
-    int a[] = {5,4,3,2,1};
-    std::cout << "Input: "; print_vector(a, 5); std::cout << '\n';
-    radix_sort(a, 5);
-    std::cout << "Output: "; print_vector(a, 5); std::cout << '\n';
+   int size = 5000;
+   std::random_device rd;
+   std::mt19937 gen(rd());
+   std::uniform_int_distribution<> distr(0, 50000);
+   int a[size];
+   for (int i{}; i < size; i++)
+      a[i] = distr(gen);
+   std::cout << "Input (first 100...last 100): ";
+   print_array(a, 100);
+   std::cout << " . . . . . . ";
+   print_array_last(a, 100);
+   std::cout << '\n';
+
+   auto start = std::chrono::high_resolution_clock::now();
+   radix_sort(a, size);
+   auto end = std::chrono::high_resolution_clock::now();
+   auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+
+   std::cout << "Output (first 100...last 100): ";
+   print_array(a, 100);
+   std::cout << " . . . . . . ";
+   print_array_last(a, 100);
+   std::cout << '\n';
+   std::cout << "\nExecution time: " << duration.count() << " nanoseconds.\n";
 }
