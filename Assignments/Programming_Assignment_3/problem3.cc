@@ -1,3 +1,13 @@
+/* Filename: problem3.cc
+ *
+ * Author: Devere Anthony Weaver 
+ * 
+ * Assignment: Programming Assignment 3
+ * Problem: Problem 3
+ * 
+ * Description: This program implements the count sort algorithm and uses it to
+ * sort a vector of randomized values. 
+ */
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -18,38 +28,29 @@ void print_vector(std::vector<T> &vec)
 template <typename T>
 void countSort(std::vector<T> &vec)
 {
+    /* implementation of count sort algorithm */
     std::vector<int> output(vec.size());
     std::vector<int> count(vec.size());
     int max{vec[0]};
 
-    // Find the largest element of the array
     for (int i = 1; i < vec.size(); i++)
     {
         if (vec[i] > max)
             max = vec[i];
     }
 
-    // Store the count of each element
     for (int i = 0; i < vec.size(); i++)
-    {
         count[vec[i]]++;
-    }
 
-    // Store the cumulative count of each array
     for (int i = 1; i <= max; i++)
-    {
         count[i] += count[i - 1];
-    }
 
-    // Find the index of each element of the original array in count array, and
-    // place the elements in output array
     for (int i = vec.size() - 1; i >= 0; i--)
     {
         output[count[vec[i]] - 1] = vec[i];
         count[vec[i]]--;
     }
 
-    // Copy the sorted elements into original array
     for (int i = 0; i < vec.size(); i++)
     {
         vec[i] = output[i];
@@ -60,6 +61,7 @@ void countSort(std::vector<T> &vec)
 
 std::vector<int> generate_random(int low, int high, int n)
 {
+    /* generate n random numbers in the interval [low, high] */
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(low, high);

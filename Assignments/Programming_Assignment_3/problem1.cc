@@ -29,7 +29,7 @@ void print_vector(std::vector<T>& vec, int n)
 
 std::vector<int> generate_random(int low, int high, int n)
 {
-    // generate 5,000 random numbers 
+    /* generate n random numbers in the interval [low, high] */
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(low,high);
