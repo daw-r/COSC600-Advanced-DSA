@@ -1,4 +1,15 @@
-#include "BinaryHeap.hpp"
+/* Filename: problem1.cc
+ *
+ * Author: Devere Anthony Weaver 
+ * 
+ * Assignment: Programming Assignment 3
+ * Problem: Problem 1
+ * 
+ * Description: This program implements min-heap building algorithms for both 
+ * O(log N) and O(N) time. 
+*/
+
+#include "MinHeap.hpp"
 #include <vector>
 #include <iostream>
 #include <random>
@@ -31,7 +42,7 @@ std::vector<int> generate_random(int low, int high, int n)
 int main()
 {
     std::vector<int> input = generate_random(0, 50000, 5000);
-    BinaryHeap<int> log_heap;
+    MinHeap<int> log_heap;
 
     /* Build a binary heap in O(log N) time */
     std::cout << "Building heap in O(log N): \n";
@@ -40,34 +51,22 @@ int main()
         log_heap.insert(input[i]);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start);
-
-    // print first 50
     std::cout << "\nFirst 50 elements: \n";
-    std::cout << log_heap.GetHeapArrayString() << '\n';
-    
-    // number of swaps  
-    int log_swaps = log_heap.GetBuildSwaps();
+    std::cout << log_heap.get_heap_array_string(50) << '\n';
+    int log_swaps = log_heap.get_build_swaps();
     std::cout << "\nThe total number of swaps: " << log_swaps << '\n';
-
-    // print execution time 
     std::cout << "\nExecution time: " << duration.count() << " nanoseconds.\n";
 
     /* Build binary heap in O(N) time */
     std::cout << "\n\n\nBuilding heap in O(N): \n";
     start = std::chrono::high_resolution_clock::now();
-    BinaryHeap<int> linear_heap(input);
+    MinHeap<int> linear_heap(input);
     end = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start);
-
-    // print first 50
     std::cout << "\nFirst 50 elements: \n";
-    std::cout << linear_heap.GetHeapArrayString() << '\n';
-    
-    // number of swaps  
-    int linear_swaps = linear_heap.GetBuildSwaps();
+    std::cout << linear_heap.get_heap_array_string(50) << '\n';
+    int linear_swaps = linear_heap.get_build_swaps();
     std::cout << "\nThe total number of swaps: " << linear_swaps << '\n';
-
-    // print execution time 
     std::cout << "\nExecution time: " << duration.count() << " nanoseconds.\n";
 
 }
