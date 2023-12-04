@@ -31,7 +31,7 @@ void print_vector(std::vector<T>& vec, int n)
 
 std::vector<int> generate_random(int low, int high, int n)
 {
-    // generate 5,000 random numbers 
+    /* generate n random numbers in the interval [low, high]*/
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(low,high);
@@ -44,7 +44,7 @@ std::vector<int> generate_random(int low, int high, int n)
 template<typename T>
 void insertion_sort(std::vector<T> vec)
 {
-    /* Simple insertion sort implementation without any explicit swapping */
+    /* simple insertion sort implementation without any explicit swapping */
     int j{};
 
     auto start = std::chrono::high_resolution_clock::now();
@@ -66,6 +66,7 @@ void insertion_sort(std::vector<T> vec)
 template<typename T>
 void selection_sort(std::vector<T> vec)
 {
+    /* implementation of the selection sort algorithm */
     int smallest_index{};
     T temp{};
 
@@ -74,14 +75,12 @@ void selection_sort(std::vector<T> vec)
     {
         smallest_index = i;
 
-        // search for smallest element index in unsorted portion
         for (int j = i + 1; j < vec.size(); j++)
         {
             if (vec[j] < vec[smallest_index])
                 smallest_index = j;
         }
 
-        // put smallest in proper sequence order 
         temp = vec[i];
         vec[i] = vec[smallest_index];
         vec[smallest_index] = temp;
@@ -97,6 +96,7 @@ template<typename T>
 void merge(std::vector<T>& vec, std::vector<T>& temp, int left, int right, 
           int right_end)
 {
+    /* implementation of merge procedure for mergesort algorithm */
     int left_end = right - 1;
     int temp_position = left;
     int n = right_end - left + 1;
@@ -122,6 +122,7 @@ void merge(std::vector<T>& vec, std::vector<T>& temp, int left, int right,
 template<typename T>
 void merge_sort(std::vector<T>& vec, std::vector<T>& temp, int left, int right)
 {
+    /* implementation of merge sort algorithm */
     if (left < right)
     {
         int center = (left + right) / 2;
@@ -134,6 +135,7 @@ void merge_sort(std::vector<T>& vec, std::vector<T>& temp, int left, int right)
 template<typename T>
 void merge_sort(std::vector<T> vec)
 {
+    /* driver for merge sort algorithm procedure */
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<T> temp(vec.size());
     merge_sort(vec, temp, 0, vec.size() - 1);
@@ -147,6 +149,7 @@ void merge_sort(std::vector<T> vec)
 template<typename T>
 void bubble_sort(std::vector<T> vec)
 {
+    /* implementation of bubble sort algorithm */
     auto start = std::chrono::high_resolution_clock::now();
     for (int i{}; i < vec.size() - 1; i++)
     {
