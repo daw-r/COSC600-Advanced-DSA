@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <chrono>
 
 template <typename T>
 void print_array(T arr[], int n)

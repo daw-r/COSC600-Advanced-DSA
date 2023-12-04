@@ -12,6 +12,8 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <string>
+#include <vector>
 
 template <typename T>
 void print_vector(std::vector<T> &vec)
