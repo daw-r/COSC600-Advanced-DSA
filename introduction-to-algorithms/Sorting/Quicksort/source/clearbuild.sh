@@ -1,1 +1,0 @@
-rm -r ../Unix_build ../Xcode_build
